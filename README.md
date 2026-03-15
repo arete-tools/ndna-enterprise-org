@@ -1,2 +1,2 @@
-# ndna-enterprise-orgndna-enterprise-org
+# ndna-enterprise-org
 NDNA Enterprise Org
