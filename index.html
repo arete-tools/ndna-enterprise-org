@@ -1007,6 +1007,7 @@ body {
   var bands = {};
   var selectedHeadline = '';
   var hasSubmitted = false;
+  var transitioning = false;
 
   // ---- DOM REFS ----
 
@@ -1140,6 +1141,7 @@ body {
   }
 
   function handleAnswer(e) {
+    if (transitioning) return;
     var btn = e.currentTarget;
     var val = parseInt(btn.getAttribute('data-value'), 10);
     var item = ITEMS[currentQ];
@@ -1153,7 +1155,9 @@ body {
     btn.classList.add('selected');
     btn.setAttribute('aria-checked', 'true');
 
+    transitioning = true;
     setTimeout(function() {
+      transitioning = false;
       if (currentQ < ITEMS.length - 1) {
         currentQ++;
         showQuestion();
@@ -1482,6 +1486,7 @@ body {
     bands = {};
     selectedHeadline = '';
     questionHeightLocked = false;
+    transitioning = false;
     elSummariesSection.classList.remove('visible');
     elBalancedBlock.classList.remove('visible');
     elSummariesSection.innerHTML = '';
